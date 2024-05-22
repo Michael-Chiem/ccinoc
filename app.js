@@ -7,7 +7,7 @@ const indexRouter = require('./routes/index');
 const app = express();
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/your_database', {
+mongoose.connect('mongodb://localhost:27017/ccinoc', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false
@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Session middleware
 app.use(session({
-  secret: 'your_secret_key',
+  secret: 'Firefly2014',
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false } // Set secure to true if using HTTPS

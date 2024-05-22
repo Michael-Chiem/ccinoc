@@ -62,21 +62,21 @@
             <!-- Render form fields with record data -->
             <div class="form-group">
                 <label for="stringFields">String Fields</label>
-                <% record.stringFields.forEach(field => { %>
-                    <input type="text" class="form-control" name="stringFields" value="<%= field %>">
+                <% record.stringFields.forEach((field, index) => { %>
+                    <input type="text" class="form-control" name="stringFields[<%= index %>]" value="<%= field %>">
                 <% }) %>
             </div>
             <div class="form-group">
                 <label for="linkFields">Link Fields</label>
-                <% record.linkFields.forEach(link => { %>
-                    <input type="text" class="form-control" name="linkFields" value="<%= link.url %>">
-                    <input type="text" class="form-control" name="linkLabels" value="<%= link.label %>">
+                <% record.linkFields.forEach((link, index) => { %>
+                    <input type="text" class="form-control" name="linkFields[<%= index %>]" value="<%= link.url %>">
+                    <input type="text" class="form-control" name="linkLabels[<%= index %>]" value="<%= link.label %>">
                 <% }) %>
             </div>
             <div class="form-group">
                 <label for="imageFields">Image Fields</label>
-                <% record.imageFields.forEach(image => { %>
-                    <input type="text" class="form-control" name="imageFields" value="<%= image %>">
+                <% record.imageFields.forEach((image, index) => { %>
+                    <input type="text" class="form-control" name="imageFields[<%= index %>]" value="<%= image %>">
                 <% }) %>
             </div>
             <button type="submit" class="btn btn-primary">Save</button>
