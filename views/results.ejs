@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .search-form {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .search-results {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .result {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .result p {
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+        .result a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .edit-button {
+            margin-top: 10px;
+        }
+        .go-back-button {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>CCI NOC Knowledge Base</h1>
+        </div>
+        <div class="search-form">
+            <!-- Include search form HTML -->
+            <form action="/search" method="get" class="form-inline">
+                <div class="form-group mb-2">
+                    <input type="text" class="form-control" name="keyword" placeholder="Search...">
+                </div>
+                <button type="submit" class="btn btn-secondary mb-2 ml-2">Search</button>
+            </form>
+        </div>
+        <div class="search-results">
+            <!-- Go back button -->
+            <a href="/" class="btn btn-secondary go-back-button">Go Back</a>
+            <% results.forEach(result => { %>
+                <div class="result">
+                    <p><strong>Info:</strong></p>
+                    <% result.stringFields.forEach(info => { %>
+                        <p><%= info %></p>
+                    <% }); %>
+                    <p><strong>Links:</strong></p>
+                    <ul>
+                        <% result.linkFields.forEach(link => { %>
+                            <li><a href="<%= link.url %>"><%= link.label %></a></li>
+                        <% }); %>
+                    </ul>
+                    <p><strong>Images:</strong></p>
+                    <ul>
+                        <% result.imageFields.forEach(image => { %>
+                            <li><img src="/<%= image %>" alt="Image" class="img-fluid"></li>
+                        <% }); %>
+                    </ul>
+                    <!-- Edit button -->
+                    <a href="/edit/<%= result._id %>" class="btn btn-primary edit-button">Edit</a>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</body>
+</html>
