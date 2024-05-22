@@ -1,3 +1,4 @@
+<!-- views/result.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,6 +41,9 @@
             color: #007bff;
             text-decoration: none;
         }
+        .result a:hover {
+            text-decoration: underline;
+        }
         .edit-button {
             margin-top: 10px;
         }
@@ -74,7 +78,7 @@
                     <p><strong>Links:</strong></p>
                     <ul>
                         <% result.linkFields.forEach(link => { %>
-                            <li><a href="<%= link.url %>"><%= link.label %></a></li>
+                            <li><a href="<%= link.url %>" target="_blank"><%= link.label %></a></li>
                         <% }); %>
                     </ul>
                     <p><strong>Images:</strong></p>
