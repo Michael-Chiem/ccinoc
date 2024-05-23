@@ -36,7 +36,11 @@
             margin-top: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            color:#fff
+            color: #fff;
+        }
+        .large-textarea {
+            width: 100%; /* Make the textarea wider */
+            height: 400px; /* Adjust height for better multiline input */
         }
     </style>
 </head>
@@ -46,11 +50,11 @@
             <h1>CCI NOC Knowledge Base</h1>
         </div>
         <div class="search-form">
-            <form action="/search" method="get" class="form-inline">
+            <form id="searchForm" action="/search" method="get" class="form-inline">
                 <div class="form-group mb-2">
-                    <input type="text" class="form-control" name="keyword" placeholder="Search...">
+                    <input id="searchInput" type="text" class="form-control" name="keyword" placeholder="Search...">
                 </div>
-                <button type="submit" class="btn btn-secondary mb-2 ml-2">Search</button>
+                <button id="searchButton" type="submit" class="btn btn-secondary mb-2 ml-2" disabled>Search</button>
             </form>
         </div>
     </div>
@@ -61,7 +65,13 @@
                 <div id="string-fields">
                     <% for (let i = 0; i < 3; i++) { %>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="stringFields" placeholder="<%= i === 0 ? 'Customer Name' : 'Input Info' %>" required>
+                        <% if (i === 0) { %>
+                        <input type="text" class="form-control" name="stringFields" placeholder="Customer Name" required>
+                        <% } else if (i === 2) { %>
+                        <textarea class="form-control large-textarea" name="stringFields" placeholder="Special Note" required></textarea>
+                        <% } else { %>
+                        <textarea class="form-control large-textarea" name="stringFields" placeholder="Input Info" required></textarea>
+                        <% } %>
                     </div>
                     <% } %>
                 </div>
@@ -88,5 +98,19 @@
             </form>
         </div>
     </div>
+
+    <script>
+        // JavaScript to enable/disable search button based on input length
+        const searchInput = document.getElementById('searchInput');
+        const searchButton = document.getElementById('searchButton');
+        
+        searchInput.addEventListener('input', function() {
+            if (searchInput.value.length >= 3) {
+                searchButton.disabled = false;
+            } else {
+                searchButton.disabled = true;
+            }
+        });
+    </script>
 </body>
 </html>
